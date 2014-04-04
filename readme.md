@@ -3,5 +3,5 @@
 __Language__ : Javascript
 
 _needs ddci-tool <http://jaffar.cs.msu.su/oleg/ddcci/>_
-* the fedory binary worked for me in mint 16 cinnamon edition
+* the fedory binary worked for me in mint 16 cinnamon edition <http://jaffar.cs.msu.su/oleg/ddcci/ddcci-tool>
 * install the tool in a reachable path, i.e, /usr/bin
