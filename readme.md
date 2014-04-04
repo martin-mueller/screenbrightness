@@ -1,4 +1,12 @@
 # Screenbrightness addon for Cinnamon Desktop (Linux Mint) Desktop - Taskbar
+## Quick Description
+I wrote this to control the brightness of an external lcd - monitor from my notebook.
+It is just a wrapper to control __ddcci-control__ from the taskbar.
+Basically, it does:
+``` ddcci-tool -r 0x10 -w <brightness_in_%> /dev/i2c-1'
+
+```
+You should change "/dev/i2c-1" to your device.
 
 __Language__ : Javascript
 
