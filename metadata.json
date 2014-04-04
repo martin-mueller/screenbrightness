@@ -1,0 +1,6 @@
+{
+	"name": "Screenbrightness",
+	"uuid": "screenbrightness@spezo",
+	"description": "A Cinnamon applet to control screen brightness",
+	"icon": "display-brightness-symbolic"
+}
