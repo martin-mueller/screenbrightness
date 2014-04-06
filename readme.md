@@ -30,10 +30,14 @@ or add i2c-dev to /etc/modules to make it permanent
 
 #### installing ddccontrol
 * I had to apt some libraries
-* when running ````make```` I had some trouble with missing Math refs.: add flag ````-lm```` (links math-functions)
+* when running ````make```` I had some trouble with missing Math refs.: add flag ````-lm```` (links math-functions) to the gcc compiler options
+ (If you don't know, what that means, give up ;D )
  <http://stackoverflow.com/questions/1033898/why-do-you-have-to-link-the-math-library-in-c>
 
 set LD_LIBRARY_PATH environment variable : ```` export LD_LIBRARY_PATH="/usr/local/lib````
+
+### Method 3 -- NOT YET IPLEMENTED! -- (xrandr software brightness/gamma (?))
+* this will be the default fallback, if no __ddc/ci__ - control - shell tool is detected
 
 
 ## DEVELOPERS 
