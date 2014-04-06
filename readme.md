@@ -29,7 +29,8 @@ or add i2c-dev to /etc/modules to make it permanent
 * using the "newer" sourceforge version, named ````ddccontrol````, rather than __ddcci-tool__
 
 #### installing ddccontrol
-* make: add flag -lm
+* I had to apt some libraries
+* when running ````make```` I had some trouble with missing Math refs.: add flag ````-lm```` (links math-functions)
  <http://stackoverflow.com/questions/1033898/why-do-you-have-to-link-the-math-library-in-c>
 
 set LD_LIBRARY_PATH environment variable : ```` export LD_LIBRARY_PATH="/usr/local/lib````
