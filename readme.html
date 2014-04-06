@@ -124,15 +124,40 @@ body{font-size:16px;}
 <h2 id="quick-description">Quick Description</h2>
 <p>I wrote this to control the brightness of an external lcd - monitor from my notebook.
 It is just a wrapper to control <strong>ddcci-tool</strong> from the taskbar.
-Basically, it does:
-<code>ddcci-tool -r 0x10 -w brightness_in_% /dev/i2c-1</code></p>
+Basically, it does:</p>
+<p><code>ddcci-tool -r 0x10 -w brightness_in_% /dev/i2c-1</code></p>
+<p>OR 
+<code>xrandr --output VGA1 --brightness [0-1]</code></p>
 <p>You should change "/dev/i2c-1" to your device.</p>
 <p><strong>Language</strong> : Javascript</p>
 <p><strong>Version</strong>: still alpha</p>
-<p><em>needs ddci-tool <a href="http://jaffar.cs.msu.su/oleg/ddcci/">http://jaffar.cs.msu.su/oleg/ddcci/</a></em>
+<h2 id="installation">Installation</h2>
+<h3 id="method-1-only-one-supported-for-001">Method 1 (only one supported for 0.0.1?):</h3>
+<p><em>download ddci-tool <a href="http://jaffar.cs.msu.su/oleg/ddcci/">http://jaffar.cs.msu.su/oleg/ddcci/</a></em>
 <em> the fedory binary worked for me in mint 16 cinnamon edition <a href="http://jaffar.cs.msu.su/oleg/ddcci/ddcci-tool">http://jaffar.cs.msu.su/oleg/ddcci/ddcci-tool</a>
 </em> install the tool in a reachable path, i.e, /usr/bin
 <em> do <code>modprobe i2c-dev</code>
 or add i2c-dev to /etc/modules to make it permanent
 </em> give your user rw - access to the i2c -dev by adding them to the group i2c:
-    usermod -Ga i2c <YourUsername></p></body></html>
+    <code>usermod -Ga i2c YourUsername</code></p>
+<h3 id="method-2">Method 2</h3>
+<ul>
+<li>using the "newer" sourceforge version, named <code>ddccontrol</code>, rather than <strong>ddcci-tool</strong></li>
+</ul>
+<h3 id="installing-ddccontrol">installing ddccontrol</h3>
+<ul>
+<li>make: add flag -lm
+ <a href="http://stackoverflow.com/questions/1033898/why-do-you-have-to-link-the-math-library-in-c">http://stackoverflow.com/questions/1033898/why-do-you-have-to-link-the-math-library-in-c</a> 
+set LD_LIBRARY_PATH : <code>export LD_LIBRARY_PATH="/usr/local/lib</code></li>
+</ul>
+<h2 id="developers">DEVELOPERS</h2>
+<p>plz. take a look athe issues
+<a href="https://github.com/martin-mueller/screenbrightness/issues?labels=question&amp;state=open">https://github.com/martin-mueller/screenbrightness/issues?labels=question&amp;state=open</a></p>
+<h3 id="monitor-detection">Monitor detection</h3>
+<h3 id="useful-local-files">Useful local files</h3>
+<p>~/.config/monitors.xml</p>
+<h3 id="links">links</h3>
+<ul>
+<li><a href="https://github.com/lordamit/Brightness/">https://github.com/lordamit/Brightness/</a> : Gnome Brightness Controller (Python), requires Package python-pyside, 
+  <a href="https://dl.dropboxusercontent.com/u/84627545/brightness_1.0.1_all.deb">https://dl.dropboxusercontent.com/u/84627545/brightness_1.0.1_all.deb</a></li>
+</ul></body></html>
