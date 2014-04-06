@@ -1,0 +1,250 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#444;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
+              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 10px auto;
+  padding: 1em;
+  outline: 1300px solid #FAFAFA;
+}
+
+a{ color: #0645ad; text-decoration:none;}
+a:visited{ color: #0b0080; }
+a:hover{ color: #06e; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0 3px 0 3px;
+}
+
+::-moz-selection{background:rgba(255,255,0,0.3);color:#000}
+::selection{background:rgba(255,255,0,0.3);color:#000}
+
+a::-moz-selection{background:rgba(255,255,0,0.3);color:#0645ad}
+a::selection{background:rgba(255,255,0,0.3);color:#0645ad}
+
+p{
+margin:1em 0;
+}
+
+img{
+max-width:100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+font-weight:normal;
+color:#111;
+line-height:1em;
+}
+h4,h5,h6{ font-weight: bold; }
+h1{ font-size:2.5em; }
+h2{ font-size:2em; border-bottom:1px solid silver; padding-bottom: 5px; }
+h3{ font-size:1.5em; }
+h4{ font-size:1.2em; }
+h5{ font-size:1em; }
+h6{ font-size:0.9em; }
+
+blockquote{
+color:#666666;
+margin:0;
+padding-left: 3em;
+border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+
+pre , code, kbd, samp { 
+  color: #000; 
+  font-family: monospace; 
+  font-size: 0.88em; 
+  border-radius:3px;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC; 
+}
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px 12px;}
+pre code { border: 0px !important; padding: 0;}
+code { padding: 0 3px 0 3px; }
+
+b, strong { font-weight: bold; }
+
+dfn { font-style: italic; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+dd { margin: 0 0 0 2em; }
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+@media only screen and (min-width: 480px) {
+body{font-size:14px;}
+}
+
+@media only screen and (min-width: 768px) {
+body{font-size:16px;}
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{font-size:12pt; max-width:100%; outline:none;}
+  a, a:visited { text-decoration: underline; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page :left { margin: 15mm 20mm 15mm 10mm; }
+  @page :right { margin: 15mm 10mm 15mm 20mm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+</style><title>applet</title></head><body><p>/*<em>
+ * TODO: i2c-tools i2cdetect
+ *  read /sys/bus/i2c/devices/
+ * install-script: add i2c-dev to modules 
+ * "usermod -aG i2c <current-user>" (give user access to /dev/i2c) 
+ * 
+ </em>/
+const Applet = imports.ui.applet;
+const GLib = imports.gi.GLib;
+const Gio  = imports.gi.Gio;
+const PopupMenu = imports.ui.popupMenu;
+const Lang = imports.lang;
+const Util = imports.misc.util;
+const FileUtils = imports.misc.fileUtils;
+const Settings = imports.ui.settings;</p>
+<p>let i2c_path = '/sys/bus/i2c/devices/';
+const i2c_dir = Gio.file_new_for_path(i2c_path);</p>
+<p>function MyApplet(orientation) {
+    this._init(orientation);
+}</p>
+<p>MyApplet.prototype = {
+    <strong>proto</strong>: Applet.IconApplet.prototype,</p>
+<pre><code>_init: function(orientation) {
+    Applet.IconApplet.prototype._init.call(this, orientation);
+
+    try {
+        /* Look for ddcc-tool (old) or ddccontrol (newer) installed, else use xrandr (sets Brightness software-based) */
+        this._command = this._probeCmdTools();
+        //this._findDevices();
+        /*Settings-Api look here: http://segfault.linuxmint.com/2013/05/applet-desklet-extension-settings-api-a-brief-example/ */
+        this.settings = new Settings.AppletSettings(this, "screenbrightness@spezo"); 
+        this.settings.bindProperty(Settings.BindingDirection.IN,  // Setting type
+                             "i2c-dev",             // The setting key
+                             "i2c-dev",             // The property to manage (this.i2c-dev)
+                             this.dev_changed,  // Callback when value changes
+                             null);               // Optional callback data
+
+
+
+
+        this.set_applet_icon_name("display-brightness-symbolic");
+        this.set_applet_tooltip("Brightness");
+
+        this.menuManager = new PopupMenu.PopupMenuManager(this);
+        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager.addMenu(this.menu);
+
+        this.textItem = new PopupMenu.PopupMenuItem("Brightness");
+        this.textItem.connect('activate', Lang.bind(this, function () {
+            // Code to execute when clicked here
+            // .........
+        }));
+        this.menu.addMenuItem(this.textItem);
+
+
+        // this._switch = new PopupMenu.PopupSwitchMenuItem("ON/OFF", this._switchState);
+        // this.menu.addMenuItem(this._switch);
+
+        this._brightnessSlider = new PopupMenu.PopupSliderMenuItem(100);
+        this._brightnessSlider.connect('value-changed', Lang.bind(this, this._sliderChanged));
+        this.menu.addMenuItem(this._brightnessSlider);
+        //this._cmd = 'ddcci-tool -r 0x10 /dev/i2c-1 | awk \'$2 == "0x10:" { print $3 }\' | awk -F \'/\' \'{ print $2 }\'';
+        this._cmd = 'ddcci-tool -r 0x10 /dev/i2c-1';
+        let ret = GLib.spawn_command_line_sync(this._cmd);
+        this._brightness = this._findBrightnessFromOutput(ret[1].toString());
+        //global.logError('wert ' + this._brightness);
+        // debug(this._brightness.toString()):
+        this._brightnessSlider.setValue(this._brightness/100);
+         this.textItem.label.text = "Brightness " + this._brightness.toString();
+    }
+    catch (e) {
+        global.logError(e);
+    }
+ },
+
+
+ _probeCmdTools: function(){
+    let out = 
+    return '';
+ }
+
+
+dev_changed: function(){
+    //this.actor.width = this.width;
+},
+
+on_applet_clicked: function(event) {
+  this.menu.toggle();      
+},
+_sliderChanged: function(slider, value) {
+    this._setBrightness(Math.floor(value * 100));
+},
+_setBrightness: function(value) {
+
+    this.textItem.label.text = "Brightness " +value;
+     GLib.spawn_command_line_async('ddcci-tool -r 0x10 -w '+ value + ' /dev/i2c-1');
+},
+_findBrightnessFromOutput: function(str){
+     let lines = str.split("\n");
+     for(let i = 0; i &lt; lines.length; i++) {
+        if (lines[i].indexOf("Control 0x10") &gt; -1){
+            let vals = lines[i].split('/');
+            let b = parseInt(vals[1]);
+            return b;
+        }
+     }
+},
+
+
+
+_findDevices: function () {
+     FileUtils.listDirAsync(i2c_dir, Lang.bind(this, this._addDevicesFomDir));
+},
+_addDevicesFomDir: function(dir_entry){
+    let pattern = /^i2c-[0-9]+/;
+    for (let i in dir_entry)
+        if (pattern.test(dir_entry[i].get_name())) global.log(dir_entry[i].get_name());
+}
+</code></pre>
+<p>};</p>
+<p>function main(metadata, orientation) {
+    let myApplet = new MyApplet(orientation);
+    return myApplet;
+}</p>
+<p>function debug(a){
+    global.log(a);
+    Util.spawn(['echo',a]);
+}</p></body></html>
