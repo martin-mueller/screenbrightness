@@ -3,7 +3,7 @@
  *  read /sys/bus/i2c/devices/
  * install-script: add i2c-dev to modules 
  * "usermod -aG i2c <current-user>" (give user access to /dev/i2c) 
- *
+ * enable/disable switches
  * TODO: add keyboard hotkeys 
  * 
  */
@@ -34,7 +34,7 @@ MyApplet.prototype = {
         try {
             /* Look for ddcc-tool (old) or ddccontrol (newer) installed, else use xrandr (sets Brightness software-based) */
             this._command = this._probeCmdTools();
-            //this._findDevices();
+            //i2c-stuff: this._findDevices();
             /*Settings-Api look here: http://segfault.linuxmint.com/2013/05/applet-desklet-extension-settings-api-a-brief-example/ */
             this.settings = new Settings.AppletSettings(this, "screenbrightness@spezo"); 
             this.settings.bindProperty(Settings.BindingDirection.IN,  // Setting type

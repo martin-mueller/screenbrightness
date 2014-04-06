@@ -23,10 +23,17 @@ or add i2c-dev to /etc/modules to make it permanent
 * give your user rw - access to the i2c -dev by adding them to the group i2c:
 	````usermod -Ga i2c YourUsername````
 
+
+
 ### installing ddccontrol
 * make: add flag -lm
  <http://stackoverflow.com/questions/1033898/why-do-you-have-to-link-the-math-library-in-c> 
 set LD_LIBRARY_PATH : ```` export LD_LIBRARY_PATH="/usr/local/lib````
+
+
+## DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!DEVELOPERS !!!
+plz. take a look athe issues
+<https://github.com/martin-mueller/screenbrightness/issues?labels=question&state=open>
 
 ### Monitor detection 
 
