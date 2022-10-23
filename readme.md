@@ -16,7 +16,11 @@ __Language__ : Javascript
 __Version__: still alpha
 
 ## Installation
-### Method 1 (only one supported for 0.0.1?): 
+from https://github.com/ddccontrol/ddccontrol
+
+````sudo apt install ddccontrol gddccontrol ddccontrol-db i2c-tools````
+
+### (old) Method 1 (only one supported for 0.0.1?): 
 _download ddci-tool <http://jaffar.cs.msu.su/oleg/ddcci/>_
 * the fedory binary worked for me in mint 16 cinnamon edition <http://jaffar.cs.msu.su/oleg/ddcci/ddcci-tool>
 * install the tool in a reachable path, i.e, /usr/bin
